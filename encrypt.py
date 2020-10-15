@@ -1,11 +1,12 @@
 from cryptography import fernet
 from tkinter import *
 import json
+
 def makekey():
    # set_text(fernet.Fernet.generate_key())
     set_text(fernet.Fernet.generate_key(), inkey)
 
-def decryptt():
+def decrypt():
     key= inkey.get()
     f= fernet.Fernet(key)
     with open("/Users/ericwang/Desktop/shit/PasswordMonkey/testpasswords.txt", "rb") as file:
@@ -27,7 +28,7 @@ def decryptencrypt():
     encrypted= f.encrypt(json.dumps(data).encode())
     with open('/Users/ericwang/Desktop/shit/PasswordMonkey/testpasswords.txt','wb') as f:
         f.write(encrypted)
-        
+
 def set_text(text, entry):
     entry.delete(0,END)
     entry.insert(0,text)
@@ -49,7 +50,7 @@ inkey.grid(row=0, column=1)
 
 getKey= Button(win, text="Get a random key", command=makekey)
 newinput= Button(win, text="Encrypt New Login", command=decryptencrypt)
-getPassword= Button(win, text="Get Password", command=decryptt)
+getPassword= Button(win, text="Get Password", command=decrypt)
 getPassword.grid(row=3, column=1)
 newinput.grid(row=4, column=1)
 getKey.grid(row=5, column=1)
